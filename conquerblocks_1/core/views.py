@@ -1,9 +1,16 @@
 from django.shortcuts import render
 
+from blog.models import Post
+from courses.models import Course
+
 
 # Vistas generales de la aplicación
 def home(request):
-    return render(request, "core/home.html")
+    context = {
+        "courses": Course.objects.filter(show_home=True),
+        "posts": Post.objects.filter(show_home=True),
+    }
+    return render(request, "core/home.html", context)
 
 
 def about_us(request):

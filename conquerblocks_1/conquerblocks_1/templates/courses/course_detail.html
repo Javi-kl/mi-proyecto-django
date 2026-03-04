@@ -8,6 +8,9 @@
         <div>
             {{course.content}}
         </div>
+        {% if course.toc %}
+        <p><a href="{{course.toc.urls}}">Descarga el temario</a></p>
+        {% endif %}
         <p><a href="{% url 'courses:course_list' %}">Volver al listado de cursos</a></p>
     <article>
     

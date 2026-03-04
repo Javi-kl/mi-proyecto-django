@@ -10,6 +10,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(
         verbose_name="Fecha y hora de creacion", default=timezone.now
     )
+    show_home = models.BooleanField("Mostrar en la home", default=False)
 
     def __str__(self) -> str:
         return self.title
