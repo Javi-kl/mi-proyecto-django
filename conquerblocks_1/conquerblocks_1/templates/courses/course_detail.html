@@ -1,6 +1,14 @@
 {% extends "layout_base.html" %}
 
-{% block head_title %}Detalles cursos{% endblock%}
+{% block head_title %}Detalles Curso{% endblock%}
 {% block page_content%}
-    <h1>Página de detalles curso</h1>
+    <article id="{{course.pk}}">
+        <h1>{{course.title}}</h1>
+        <p>Fecha de publicación: {{ course.created_at}} </p>
+        <div>
+            {{course.content}}
+        </div>
+        <p><a href="{% url 'courses:course_list' %}">Volver al listado de cursos</a></p>
+    <article>
+    
 {% endblock %}
