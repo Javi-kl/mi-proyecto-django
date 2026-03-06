@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
+    "thumbnails",
+    "debug_toolbar",
+    "ckeditor",
     "blog",
     "core",
     "courses",
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -135,3 +138,28 @@ INTERNAL_IPS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+THUMBNAILS = {
+    "METADATA": {
+        "BACKEND": "thumbnails.backends.metadata.DatabaseBackend",
+    },
+    "STORAGE": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        # You can also use Amazon S3 or any other Django storage backends
+    },
+    "SIZES": {
+        "small": {
+            "PROCESSORS": [
+                {"PATH": "thumbnails.processors.resize", "width": 300, "height": 200},
+            ],
+        },
+        "large": {
+            "PROCESSORS": [
+                {"PATH": "thumbnails.processors.resize", "width": 800, "height": 600},
+                {"PATH": "thumbnails.processors.crop", "width": 808, "height": 200},
+            ],
+        },
+    },
+}
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"

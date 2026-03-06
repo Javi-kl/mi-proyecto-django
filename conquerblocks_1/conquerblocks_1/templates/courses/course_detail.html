@@ -3,10 +3,16 @@
 {% block head_title %}Detalles Curso{% endblock%}
 {% block page_content%}
     <article id="{{course.pk}}">
+        {% if course.course_img %}
+            
+            <picture>
+                <img src="{{course.course_img.thumbnails.large.url}}" alt="">
+            </picture>
+        {% endif%}
         <h1>{{course.title}}</h1>
         <p>Fecha de publicación: {{ course.created_at}} </p>
         <div>
-            {{course.content}}
+            {{course.content|safe}}
         </div>
         {% if course.toc %}
         <p><a href="{{course.toc.urls}}">Descarga el temario</a></p>
