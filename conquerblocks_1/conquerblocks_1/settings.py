@@ -163,3 +163,11 @@ THUMBNAILS = {
 }
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+# Configuración de correo
+
+EMAIL_HOST = "smtp.dondominio"
+EMAIL_HOST_USER = "info@laveladaconquer.com"
+EMAIL_HOST_PASSWORD = "Usuario123."
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
