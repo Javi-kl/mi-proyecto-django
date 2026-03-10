@@ -1,10 +1,12 @@
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from blog.models import Post
 from courses.models import Course
 
-from .forms import ContactForm
+from .forms import ContactForm, LoginForm
 from .models import Contact
 
 
@@ -21,8 +23,35 @@ def about_us(request):
     return render(request, "core/about_us.html")
 
 
-def login(request):
-    return render(request, "core/login.html")
+def login_view(request):
+    if request.POST:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse("core:home"))
+            else:
+                context = {
+                    "form": form,
+                    "error": True,
+                    "error_message": "Usuario no válido",
+                }
+                return render(request, "core/login.html", context)
+        else:
+            context = {"form": form, "error": True}
+            return render(request, "core/login.html", context)
+    else:
+        form = LoginForm()
+        context = {"form": form}
+        return render(request, "core/login.html", context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse("core:home"))
 
 
 def register(request):

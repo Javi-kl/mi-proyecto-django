@@ -171,3 +171,7 @@ EMAIL_HOST_USER = "info@laveladaconquer.com"
 EMAIL_HOST_PASSWORD = "Usuario123."
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"  # La vista a la que redirige después de hacer login exitoso
+LOGOUT_REDIRECT_URL = "/"  # La vista a la que redirige después de un logout
