@@ -2,5 +2,17 @@
 
 {% block head_title %}Registro{% endblock%}
 {% block page_content%}
-    <h1>Página de registro</h1>
+    <h1>Registro</h1>
+    {% if form %}
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button>Enviar</button>
+        </form>
+    {% else %}
+    <p>{{ msj }}</p>
+    {% endif %}
 {% endblock %}
