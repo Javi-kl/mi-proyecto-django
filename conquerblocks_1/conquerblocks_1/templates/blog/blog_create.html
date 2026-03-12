@@ -1,0 +1,18 @@
+{% extends "layout_base.html" %}
+
+{% block head_title %}Creación de noticia{% endblock%}
+{% block page_content%}
+    <h1>Registro</h1>
+    {% if form %}
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit">Enviar</button>
+        </form>
+    {% else %}
+    <p>{{ msj }}</p>
+    {% endif %}
+{% endblock %}
