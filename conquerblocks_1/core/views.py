@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.views.generic.edit import FormView
 
 from blog.models import Post
 from courses.models import Course
@@ -115,3 +116,29 @@ def contact(request):
     context = {"form": formulario}
 
     return render(request, "core/contact.html", context)
+
+
+class ContactFormView(FormView):
+    template_name = "core/contact.html"
+    form_class = ContactForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        nombre = form.cleaned_data["nombre"]
+        email = form.cleaned_data["email"]
+        comentario = form.cleaned_data["comentario"]
+
+        Contact.objects.create(nombre=nombre, email=email, comentario=comentario)
+
+        message_content = (
+            f"{nombre} con email {email} ha escrito lo siguiente: {comentario}"
+        )
+        # NO OPERATIVA
+        success = send_mail(
+            "Formulario de contacto",
+            message_content,
+            "info@laveladaconquer.com",
+            ["prueba@gmail.com"],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
