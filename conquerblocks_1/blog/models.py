@@ -5,7 +5,7 @@ from thumbnails.fields import ImageField
 
 
 # Create your models here.
-class Post(models.Model):
+class PostModel(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
     content = RichTextField(verbose_name="Contenido")
     autor = models.CharField(verbose_name="autor", max_length=100)

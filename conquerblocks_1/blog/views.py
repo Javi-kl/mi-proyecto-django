@@ -1,35 +1,24 @@
-from django.shortcuts import redirect, render
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
 
-from .forms import PostModelFormCreate
-from .models import Post
+from .models import PostModel
 
 
-def blog_create(request):
-    if request.method == "POST":
-        form = PostModelFormCreate(request.POST)
-        if form.is_valid():
-            form.save()
-            context = {"msj": "Noticia creada correctamente"}
-            return redirect("blog:blog_list")
-
-        else:
-            context = {"form": form, "error": True}
-            return render(request, "blog/blog_create.html", context)
-    else:
-        form = PostModelFormCreate()
-        context = {"form": form}
-        return render(request, "blog/blog_create.html", context)
+class PostCreateView(CreateView):
+    model = PostModel
+    fields = ["title", "content", "autor", "show_home", "blog_img"]
+    template_name = "blog/blog_create_ccbv.html"
+    success_url = reverse_lazy("blog:posts_list_ccbv")
 
 
 class PostListView(ListView):
-    model = Post
+    model = PostModel
     template_name = "blog/posts_list_ccbv.html"
     context_object_name = "posts"
 
 
 class PostDetailView(DetailView):
-    model = Post
+    model = PostModel
     template_name = "blog/posts_detail_ccbv.html"
     context_object_name = "post"
 

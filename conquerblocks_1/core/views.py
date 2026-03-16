@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import FormView, TemplateView
 
-from blog.models import Post
+from blog.models import PostModel
 
 from .forms import ContactForm, LoginForm, UserRegisterForm
 from .models import Contact
@@ -14,7 +14,7 @@ from .models import Contact
 # Vistas generales de la aplicación
 def home(request):
     context = {
-        "posts": Post.objects.filter(show_home=True),
+        "posts": PostModel.objects.filter(show_home=True),
     }
     return render(request, "core/home.html", context)
 

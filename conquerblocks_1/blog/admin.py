@@ -1,10 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post
+from .models import PostModel
 
 
-@admin.register(Post)
+@admin.register(PostModel)
 class PostResource(admin.ModelAdmin):
-    model = Post
+    model = PostModel
     list_display = ("pk", "title", "autor", "created_at")
