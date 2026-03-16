@@ -20,7 +20,7 @@ def home(request):
 
 
 class AboutView(TemplateView):
-    template_name = "core/about_view_ccbv.html"
+    template_name = "core/about_view.html"
 
     def get_context_data(self, **kwargs):
 
