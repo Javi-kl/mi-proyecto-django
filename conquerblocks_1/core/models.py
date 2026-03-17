@@ -14,6 +14,5 @@ class Contact(models.Model):
         verbose_name="¿Se ha contactado con él?", default=False
     )
 
-
-def __str__(self):
-    return self.nombre
+    def __str__(self):
+        return self.nombre

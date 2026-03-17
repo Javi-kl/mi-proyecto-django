@@ -2,25 +2,6 @@
 
 {% block head_title %}Página Home{% endblock%}
 {% block page_content%}
-    <h1>La escuela líder en habla hispana</h1>
-    <p>Da un giro a tu futuro profesional</p>
-
-    <h2>Descubre ConquerBlocks</h2>
-    <p>La escuela número 1 en desarrollo de tecnologías emergentes</p>
-
-    <p><a href="{% url 'core:about_us' %}">Conoce ConquerBlocks </a></p>
-    <h2>Estudia con nosotros</h2>
-    {% for course in courses %}
-    <article id="{{course.pk}}">
-        <h3>{{course.title}}</h3>
-        <p>Fecha de publicación: {{ course.created_at}} </p>
-        <div>
-            {{course.content|truncatechars:100}}...
-        </div>
-        <p><a href="{% url 'courses:course_detail' course.pk%}"> Ver detalle curso</a></p>
-    <article>
-    {% endfor %}
-
     <h2>Últimas noticias</h2>
     {% for post in posts %}
     <article id="{{post.pk}}">
