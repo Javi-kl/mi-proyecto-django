@@ -18,17 +18,17 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("blog:posts_list")
 
     def form_valid(self, form):
-        form.instance.autor = self.request.user
+        form.instance.created_by = self.request.user
         return super().form_valid(form)
 
 
-class PostListView(LoginRequiredMixin, ListView):
+class PostListView(ListView):
     model = PostModel
     template_name = "blog/posts_list.html"
     context_object_name = "posts"
 
 
-class PostDetailView(LoginRequiredMixin, DetailView):
+class PostDetailView(DetailView):
     model = PostModel
     template_name = "blog/post_detail.html"
     context_object_name = "post"

@@ -1,4 +1,5 @@
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from thumbnails.fields import ImageField
@@ -8,7 +9,6 @@ from thumbnails.fields import ImageField
 class PostModel(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
     content = RichTextField(verbose_name="Contenido")
-    autor = models.CharField(verbose_name="autor", max_length=100)
     created_at = models.DateTimeField(
         verbose_name="Fecha y hora de creacion", default=timezone.now
     )
@@ -19,6 +19,9 @@ class PostModel(models.Model):
         upload_to="blog/images/",
         null=True,
         blank=True,
+    )
+    created_by = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL
     )
 
     def __str__(self) -> str:

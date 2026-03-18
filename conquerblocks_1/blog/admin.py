@@ -7,4 +7,4 @@ from .models import PostModel
 @admin.register(PostModel)
 class PostResource(admin.ModelAdmin):
     model = PostModel
-    list_display = ("pk", "title", "autor", "created_at")
+    list_display = ("pk", "title", "created_at")

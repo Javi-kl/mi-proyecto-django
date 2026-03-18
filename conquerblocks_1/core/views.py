@@ -31,7 +31,7 @@ class AboutView(TemplateView):
 
 
 def login_view(request):
-    if request.POST:
+    if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
@@ -62,7 +62,7 @@ def logout_view(request):
 
 
 def register(request):
-    if request.POST:
+    if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]

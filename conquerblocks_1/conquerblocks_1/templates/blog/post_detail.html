@@ -4,8 +4,10 @@
 {% block page_content%}
 
     <article id="{{post.pk}}">
-        <li><a href="{% url 'blog:post_update' post.pk %}">Editar Post</a></li>
-        <li><a href="{% url 'blog:post_delete' post.pk %}">Eliminar Post</a></li>
+        {% if post.created_by == request.user %}
+            <li><a href="{% url 'blog:post_update' post.pk %}">Editar Post</a></li>
+            <li><a href="{% url 'blog:post_delete' post.pk %}">Eliminar Post</a></li>
+        {% endif %}
         <h1>{{ titulo }}</h1>
         {% if post.blog_img %}
             <picture>
