@@ -9,7 +9,7 @@ AI agent guidelines for this Django project.
 - **Framework**: Django 6.0.2
 - **Python**: 3.14
 - **Database**: SQLite3 (db.sqlite3)
-- **Apps**: blog, core, courses
+- **Apps**: blog, core
 - **Language**: Spanish (es-es) for user-facing content
 
 ---
@@ -47,7 +47,7 @@ python manage.py test
 # Run tests for specific app
 python manage.py test blog
 python manage.py test core
-python manage.py test courses
+
 
 # Run single test class
 python manage.py test blog.tests.PostModelTest

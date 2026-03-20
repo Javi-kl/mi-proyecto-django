@@ -11,7 +11,6 @@
 ### Apps
 - `blog` - Blog posts with rich text
 - `core` - Contact form
-- `courses` - Course listings with rich text
 
 ### User Skills (Global)
 No project-level skills detected.
