@@ -1,0 +1,97 @@
+/* matrix_theme.css */
+/* Fondo negro para toda la página */
+body {
+    background: linear-gradient(90deg, #000000 50%, #001100 50%); /* Líneas verticales sutiles */
+    background-size: 2px 100%; /* Grosor de líneas */
+    background-color: #000000; /* Negro puro */
+    color: #008d00; /* Verde Matrix */
+    font-family: 'Courier New', monospace; /* Fuente tipo terminal para efecto Matrix */
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+.page-content {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+footer p {
+    text-align: center;
+}
+
+/* Enlaces en verde más brillante al pasar el mouse */
+a {
+    color: #00ff00;
+    text-decoration: none;
+}
+a:hover {
+    color: #00ff88; /* Verde más claro */
+    text-shadow: 0 0 5px #00ff00; /* Efecto glow sutil */
+}
+
+/* Headers (títulos) con sombra verde */
+h1, h2, h3, h4, h5, h6 {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Botones con estilo Matrix */
+button, input[type="submit"] {
+    background-color: #000000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+}
+button:hover, input[type="submit"]:hover {
+    background-color: #00ff00;
+    color: #000000;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Formularios y campos de entrada */
+input, textarea, select {
+    background-color: #000000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: 'Courier New', monospace;
+}
+
+/* Para elementos de Django como admin o formularios, ajusta si es necesario */
+.form-group, .field {
+    color: #00ff00;
+}
+
+
+img {
+    box-shadow: 0 0 10px #00ff00; /* Glow verde alrededor de imágenes */
+}
+
+.main-menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 0;
+}
+.main-menu li a {
+    padding: 8px 12px;
+    display: inline-block;
+}
+.user {
+    padding: 10px 20px;
+}
+
+.site-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+header img {
+    display: block;
+    margin: 0 auto;
+}

@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block head_title %}Título base{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/matrix_theme.css' %}">
 <head>
 <body>
-    {% include '_includes/_header.html' %}
-
-    {% block page_content %}
-
-    {% endblock %}
-    
-    {% include '_includes/_footer.html' %}
+    <div class="site-wrapper">
+        {% include '_includes/_header.html' %}
+        <main class="page-content">
+            {% block page_content %}
+            {% endblock %}
+        </main>
+        {% include '_includes/_footer.html' %}
+    </div>
 <body>
 </html>

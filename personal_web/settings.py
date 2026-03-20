@@ -71,6 +71,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "personal_web.context_processor.get_statistics_posts",
+                "personal_web.context_processor.get_avatar",
             ],
         },
     },

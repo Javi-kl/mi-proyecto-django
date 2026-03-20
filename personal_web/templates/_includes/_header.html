@@ -1,10 +1,13 @@
 {% load static%}
 <header>
-    <a href="">
-        <img src="{% static 'img/logotipo_conquer.avif' %}" alt="Logotipo de ConquerBlocks">
-    </a>
+    <h1>Javi-kl</h1>
+{% if header_avatar %}
+    <img src="{{ header_avatar.blog_img.thumbnails.large.url }}" alt="Avatar">
+{% else %}
+    <img src="{% static 'img/Github_perfil.jpeg' %}" alt="Avatar default">
+{% endif %}
 </header>
 
 <nav>
     {% include '_includes/_main_menu.html' %}
-<nav>
+</nav>
