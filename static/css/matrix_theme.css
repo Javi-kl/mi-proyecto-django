@@ -3,7 +3,6 @@
 body {
     background: linear-gradient(90deg, #000000 50%, #001100 50%); /* Líneas verticales sutiles */
     background-size: 2px 100%; /* Grosor de líneas */
-    background-color: #000000; /* Negro puro */
     color: #008d00; /* Verde Matrix */
     font-family: 'Courier New', monospace; /* Fuente tipo terminal para efecto Matrix */
     padding: 0;
@@ -15,6 +14,12 @@ h1 {
 .page-content {
     padding-left: 50px;
     padding-right: 50px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 footer p {
@@ -59,16 +64,6 @@ input, textarea, select {
     font-family: 'Courier New', monospace;
 }
 
-/* Para elementos de Django como admin o formularios, ajusta si es necesario */
-.form-group, .field {
-    color: #00ff00;
-}
-
-
-img {
-    box-shadow: 0 0 10px #00ff00; /* Glow verde alrededor de imágenes */
-}
-
 .main-menu {
     list-style: none;
     display: flex;
@@ -90,8 +85,4 @@ img {
     display: flex;
     flex-direction: column;
     gap: 30px;
-}
-header img {
-    display: block;
-    margin: 0 auto;
 }

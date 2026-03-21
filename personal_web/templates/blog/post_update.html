@@ -3,17 +3,5 @@
 {% block head_title %}Editar noticia{% endblock%}
 {% block page_content%}
     <h1>Editar post</h1>
-    {% if form %}
-        {% if error_message %}
-            {{ error_message }}
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button type="submit">Enviar</button>
-        </form>
-        <p><a href="{% url 'blog:posts_list' %}">Volver a las noticias</a></p>
-    {% else %}
-    <p>{{ msj }}</p>
-    {% endif %}
+    {% include '_includes/_post_form.html' %}
 {% endblock %}
