@@ -5,16 +5,17 @@
 
     <article id="{{post.pk}}">
         {% if post.created_by == request.user %}
+        <ul>
             <li><a href="{% url 'blog:post_update' post.pk %}">Editar Post</a></li>
             <li><a href="{% url 'blog:post_delete' post.pk %}">Eliminar Post</a></li>
+        </ul>
         {% endif %}
-        <h1>{{ titulo }}</h1>
+        <h1>{{post.title}}</h1>
         {% if post.blog_img %}
             <picture>
                 <img src="{{post.blog_img.thumbnails.large.url}}" alt="">
             </picture>
-        {% endif%}
-        <h1>{{post.title}}</h1>
+        {% endif%}    
         <p>Fecha de publicación: {{ post.created_at}} </p>
         <div>
             {{post.content|safe}}

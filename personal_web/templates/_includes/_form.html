@@ -1,0 +1,14 @@
+{% if form %}
+    {% if error_message %}
+        {{ error_message }}
+    {% endif %}
+    <a href="{{ request.META.HTTP_REFERER|default:'/' }}"> <= Volver</a>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Enviar</button>
+    </form>
+    
+{% else %}
+    <p>{{ msj }}</p>
+{% endif %}

@@ -1,0 +1,12 @@
+{% extends "layout_base.html" %}
+
+{% block head_title %}Eliminar Proyecto{% endblock%}
+{% block page_content%}
+    <h2>¿Eliminar proyecto {{ object.titulo }} </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button>Eliminar</button>
+    </form>
+    
+{% endblock %}
