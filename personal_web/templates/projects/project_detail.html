@@ -1,0 +1,27 @@
+{% extends "layout_base.html" %}
+
+{% block head_title %}Detalles Proyecto{% endblock%}
+{% block page_content%}
+
+    <article id="{{project.pk}}">
+        {% if project
+            .created_by == request.user %}
+        <ul>
+            <li><a href="{% url 'projects:project_update' project.pk %}">Editar Proyecto</a></li>
+            <li><a href="{% url 'projects:project_delete' project.pk %}">Eliminar Proyecto</a></li>
+        </ul>
+        {% endif %}
+        <h1>{{project.title}}</h1>
+        {% if project.project_img %}
+            <picture>
+                <img src="{{project.project_img.thumbnails.large.url}}" alt="">
+            </picture>
+        {% endif%}    
+        <p>Fecha de publicación: {{ project.created_at}} </p>
+        <div>
+            {{project.content|safe}}
+        </div>
+        <p><a href="{% url 'projects:projects_list' %}">Volver a la lista de proyectos</a></p>
+    <article>
+    
+{% endblock %}
