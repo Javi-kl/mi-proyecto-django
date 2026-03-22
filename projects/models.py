@@ -18,9 +18,18 @@ class ProjectModel(models.Model):
         null=True,
         blank=True,
     )
+    github_url = models.URLField(verbose_name="GitHub", blank=True, null=True)
+
     created_by = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL
     )
+
+    order = models.PositiveIntegerField(verbose_name="Orden", default=0, blank=True)
+
+    class Meta:
+        ordering = ["-order", "-created_at"]
+        verbose_name = "Proyecto"
+        verbose_name_plural = "Proyectos"
 
     def __str__(self) -> str:
         return self.title

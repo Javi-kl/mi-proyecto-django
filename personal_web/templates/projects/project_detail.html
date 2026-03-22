@@ -16,10 +16,13 @@
                 <img src="{{project.project_img.thumbnails.large.url}}" alt="">
             </picture>
         {% endif%}    
-        <p>Fecha de publicación: {{ project.created_at}} </p>
         <div>
             {{project.description|safe}}
         </div>
+        {% if project.github_url %}
+            <p>Ver en GitHub: <a href="{{project.github_url}}" target="_blank">{{project.github_url}}</a></p>
+        {% endif %}
+        <p>Publicado: {{ project.created_at}} </p>
         <p><a href="{% url 'core:home' %}">Volver</a></p>
     <article>
     

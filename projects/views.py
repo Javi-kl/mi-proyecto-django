@@ -9,8 +9,6 @@ from django.views.generic import (
 
 from .models import ProjectModel
 
-# TODO  proteccion superuser para eliminar y actualizar proyectos
-
 
 class SuperuserRequiredMixin(UserPassesTestMixin):
     def test_func(self):
@@ -19,7 +17,7 @@ class SuperuserRequiredMixin(UserPassesTestMixin):
 
 class ProjectCreateView(SuperuserRequiredMixin, CreateView):
     model = ProjectModel
-    fields = ["title", "description", "project_img"]
+    fields = ["title", "description", "project_img", "github_url", "order"]
     template_name = "projects/project_create.html"
     success_url = reverse_lazy("projects:projects_list")
 
@@ -36,7 +34,7 @@ class ProjectDetailView(DetailView):
 
 class ProjectUpdateView(SuperuserRequiredMixin, UpdateView):
     model = ProjectModel
-    fields = ["title", "description", "project_img"]
+    fields = ["title", "description", "project_img", "github_url", "order"]
     template_name = "projects/project_update.html"
     success_url = reverse_lazy("projects:projects_list")
 
