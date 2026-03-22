@@ -1,19 +1,25 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
-    ListView,
     UpdateView,
 )
 
 from .models import ProjectModel
 
+# TODO  proteccion superuser para eliminar y actualizar proyectos
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+
+class SuperuserRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class ProjectCreateView(SuperuserRequiredMixin, CreateView):
     model = ProjectModel
-    fields = ["title", "description", "show_home", "project_img"]
+    fields = ["title", "description", "project_img"]
     template_name = "projects/project_create.html"
     success_url = reverse_lazy("projects:projects_list")
 
@@ -22,26 +28,20 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProjectListView(ListView):
-    model = ProjectModel
-    template_name = "projects/projects_list.html"
-    context_object_name = "projects"
-
-
 class ProjectDetailView(DetailView):
     model = ProjectModel
     template_name = "projects/project_detail.html"
     context_object_name = "project"
 
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+class ProjectUpdateView(SuperuserRequiredMixin, UpdateView):
     model = ProjectModel
-    fields = ["title", "description", "show_home", "project_img"]
+    fields = ["title", "description", "project_img"]
     template_name = "projects/project_update.html"
     success_url = reverse_lazy("projects:projects_list")
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(SuperuserRequiredMixin, DeleteView):
     model = ProjectModel
     success_url = reverse_lazy("projects:projects_list")
     template_name = "projects/project_delete.html"

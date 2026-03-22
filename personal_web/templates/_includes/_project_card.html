@@ -8,8 +8,8 @@
             {% endif%}
             <p>Fecha de publicación: {{ project.created_at}} </p>
             <div>
-                {{project.content|truncatechars:100|safe}}...
+                {{project.description|truncatechars:100|safe}}...
             </div>
-            <p><a href="{% url 'projects:project_detail' project.pk%}"> Ver proyecto completo</a></p>
+            <p><a href="{% url 'projects:project_detail' project.pk%}"> Ver proyecto</a></p>
         <article>
     {% endfor %}

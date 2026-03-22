@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.views import LogoutView
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
-from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import FormView, TemplateView
@@ -18,7 +17,7 @@ from .models import Contact
 # Vistas generales de la aplicación
 def home(request):
     context = {
-        "projects": ProjectModel.objects.filter(show_home=True),
+        "projects": ProjectModel.objects.all(),
     }
     return render(request, "core/home.html", context)
 

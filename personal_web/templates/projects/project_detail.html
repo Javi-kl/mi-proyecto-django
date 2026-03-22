@@ -4,8 +4,7 @@
 {% block page_content%}
 
     <article id="{{project.pk}}">
-        {% if project
-            .created_by == request.user %}
+        {% if request.user.is_superuser %}
         <ul>
             <li><a href="{% url 'projects:project_update' project.pk %}">Editar Proyecto</a></li>
             <li><a href="{% url 'projects:project_delete' project.pk %}">Eliminar Proyecto</a></li>
@@ -19,9 +18,9 @@
         {% endif%}    
         <p>Fecha de publicación: {{ project.created_at}} </p>
         <div>
-            {{project.content|safe}}
+            {{project.description|safe}}
         </div>
-        <p><a href="{% url 'projects:projects_list' %}">Volver a la lista de proyectos</a></p>
+        <p><a href="{% url 'core:home' %}">Volver</a></p>
     <article>
     
 {% endblock %}

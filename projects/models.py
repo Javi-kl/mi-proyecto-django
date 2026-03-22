@@ -11,7 +11,6 @@ class ProjectModel(models.Model):
     created_at = models.DateTimeField(
         verbose_name="Fecha y hora de creación", default=timezone.now
     )
-    show_home = models.BooleanField("Mostrar en la home", default=False)
 
     project_img = ImageField(
         verbose_name="Imagen del proyecto",

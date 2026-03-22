@@ -2,6 +2,11 @@
 
 {% block head_title %}Home{% endblock%}
 {% block page_content%}
-    <h1>Proyectos destacados</h1>
+    <h1>Proyectos</h1>
+    {% if request.user.is_superuser %}
+        <ul>
+            <li><a href="{% url 'projects:project_create' %}">Crear Proyecto</a></li>
+        </ul>
+        {% endif %}
     {% include '_includes/_project_card.html' %}
 {% endblock %}

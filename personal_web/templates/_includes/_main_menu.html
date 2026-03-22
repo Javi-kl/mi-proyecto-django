@@ -1,26 +1,20 @@
 <ul class="main-menu">
     <li><a href="{% url 'core:home' %}">INICIO</a></li>
     <li><a href="{% url 'core:about_us' %}">SOBRE MÍ</a></li>
-    <li><a href="{% url 'projects:projects_list' %}">PROYECTOS</a></li>
+    <li><a href="{% url 'core:contact' %}">CONTACTO</a></li>
     {% if not request.user.is_authenticated %}
         <li><a href="{% url 'core:register' %}">REGISTRO</a></li>
     {% endif %}
-    <li><a href="{% url 'core:contact' %}">CONTACTO</a></li>
-
-</ul>
-
-
-<section class="user">
     {% if request.user.is_authenticated %}
-        <p>Logueado como: {{ request.user}} </p>
         <form method="post" action="{% url 'core:logout' %}">
             {% csrf_token %}
-            <button type="submit">Cerrar sesión</button>
+            <button type="submit">CERRAR SESIÓN</button>
         </form>
     {% else %}
-        <p><a href="{% url 'core:login' %}">Login</a></p>
+        <button><a href="{% url 'core:login' %}">LOGIN</a></button>
     {% endif %}
-</section>
+</ul>
+
 
 <section class="messages">
     {% if messages %}
