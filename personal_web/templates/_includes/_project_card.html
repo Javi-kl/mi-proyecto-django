@@ -1,15 +1,15 @@
-{% for post in posts %}
-        <article id="{{post.pk}}">
-            <h2>{{post.title}}</h2>
-            {% if post.blog_img %}
+{% for project in projects %}
+        <article id="{{project.pk}}">
+            <h2>{{project.title}}</h2>
+            {% if project.project_img %}
                 <picture>
-                    <img src="{{post.blog_img.thumbnails.small.url}}" alt="">
+                    <img src="{{project.project_img.thumbnails.small.url}}" alt="">
                 </picture>
             {% endif%}
-            <p>Fecha de publicación: {{ post.created_at}} </p>
+            <p>Fecha de publicación: {{ project.created_at}} </p>
             <div>
-                {{post.content|truncatechars:100|safe}}...
+                {{project.content|truncatechars:100|safe}}...
             </div>
-            <p><a href="{% url 'projects:project_detail' post.pk%}"> Ver proyecto completo</a></p>
+            <p><a href="{% url 'projects:project_detail' project.pk%}"> Ver proyecto completo</a></p>
         <article>
     {% endfor %}

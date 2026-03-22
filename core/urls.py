@@ -3,10 +3,10 @@ from django.urls import path
 from .views import (
     AboutView,
     ContactFormView,
+    RegisterView,
+    UserLoginView,
+    UserLogoutView,
     home,
-    login_view,
-    logout_view,
-    register,
 )
 
 app_name = "core"
@@ -14,7 +14,7 @@ urlpatterns = [
     path("", home, name="home"),
     path("sobre-nosotros/", AboutView.as_view(), name="about_us"),
     path("contacto/", ContactFormView.as_view(), name="contact"),
-    path("registro/", register, name="register"),
-    path("login/", login_view, name="login"),
-    path("logout/", logout_view, name="logout"),
+    path("registro/", RegisterView.as_view(), name="register"),
+    path("login/", UserLoginView.as_view(), name="login"),
+    path("logout/", UserLogoutView.as_view(), name="logout"),
 ]

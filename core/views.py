@@ -1,20 +1,24 @@
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.views import LogoutView
 from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.http.response import HttpResponse as HttpResponse
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import FormView, TemplateView
 
-from blog.models import PostModel
+from projects.models import ProjectModel
 
-from .forms import ContactForm, LoginForm, UserRegisterForm
+from .forms import ContactForm
 from .models import Contact
 
 
 # Vistas generales de la aplicación
 def home(request):
     context = {
-        "posts": PostModel.objects.filter(show_home=True),
+        "projects": ProjectModel.objects.filter(show_home=True),
     }
     return render(request, "core/home.html", context)
 
@@ -30,64 +34,39 @@ class AboutView(TemplateView):
         return context
 
 
-def login_view(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect(reverse("core:home"))
-            else:
-                context = {
-                    "form": form,
-                    "error": True,
-                    "error_message": "Usuario no válido",
-                }
-                return render(request, "core/login.html", context)
-        else:
-            context = {"form": form, "error": True}
-            return render(request, "core/login.html", context)
-    else:
-        form = LoginForm()
-        context = {"form": form}
-        return render(request, "core/login.html", context)
+class UserLoginView(FormView):
+    template_name = "core/login.html"
+    form_class = AuthenticationForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        user = form.get_user()
+        login(self.request, user)
+        messages.success(self.request, f"Bienvenido {user.username}")
+        return super().form_valid(form)
 
 
-def logout_view(request):
-    logout(request)
-    return redirect(reverse("core:home"))
+class UserLogoutView(LogoutView):
+    next_page = "core:home"
+
+    def post(self, request, *args, **kwargs):
+        messages.success(request, "Has cerrado sesión.")
+        return super().post(request, *args, **kwargs)
 
 
-def register(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            first_name = form.cleaned_data["first_name"]
-            last_name = form.cleaned_data["last_name"]
-            email = form.cleaned_data["email"]
-            password1 = form.cleaned_data["password1"]
-            password2 = form.cleaned_data["password2"]
+class RegisterView(FormView):
+    template_name = "core/register.html"
+    form_class = UserCreationForm
+    success_url = "/"
 
-            user = User.objects.create_user(username, email, password1)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("core:home"))
+        return super().dispatch(request, *args, **kwargs)
 
-            if user:
-                user.first_name = first_name
-                user.last_name = last_name
-                user.save()
-
-            context = {"msj": "Usuario creado correctamente"}
-            return render(request, "core/register.html", context)
-        else:
-            context = {"form": form, "error": True}
-            return render(request, "core/register.html", context)
-    else:
-        form = UserRegisterForm()
-        context = {"form": form}
-        return render(request, "core/register.html", context)
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 class ContactFormView(FormView):
@@ -96,15 +75,12 @@ class ContactFormView(FormView):
     success_url = "/"
 
     def form_valid(self, form):
-        nombre = form.cleaned_data["nombre"]
         email = form.cleaned_data["email"]
         comentario = form.cleaned_data["comentario"]
 
-        Contact.objects.create(nombre=nombre, email=email, comentario=comentario)
+        Contact.objects.create(email=email, comentario=comentario)
 
-        message_content = (
-            f"{nombre} con email {email} ha escrito lo siguiente: {comentario}"
-        )
+        message_content = f"{email} ha escrito lo siguiente: {comentario}"
         # NO OPERATIVA
         success = send_mail(
             "Formulario de contacto",
