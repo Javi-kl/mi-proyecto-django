@@ -5,6 +5,37 @@ from django.utils import timezone
 from thumbnails.fields import ImageField
 
 
+class Comment(models.Model):
+    project = models.ForeignKey(
+        "ProjectModel",
+        on_delete=models.CASCADE,
+        related_name="comments",
+        verbose_name="Proyecto",
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="comments",
+        verbose_name="Autor",
+    )
+    content = models.TextField(
+        verbose_name="Contenido",
+        max_length=1000,
+    )
+    created_at = models.DateTimeField(
+        verbose_name="Fecha de creación",
+        default=timezone.now,
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Comentario"
+        verbose_name_plural = "Comentarios"
+
+    def __str__(self) -> str:
+        return f"{self.author.username}: {self.content[:50]}..."
+
+
 class ProjectModel(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
     description = RichTextField(verbose_name="Descripción")
