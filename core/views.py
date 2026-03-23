@@ -2,19 +2,16 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.views import LogoutView
-from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
 from projects.models import ProjectModel
 
 from .forms import ContactForm
-from .models import Contact
 
 
-# Vistas generales de la aplicación
 def home(request):
     context = {
         "projects": ProjectModel.objects.all(),
@@ -26,9 +23,7 @@ class AboutView(TemplateView):
     template_name = "core/about_view.html"
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
-
         context["titulo"] = "Sobre mí"
         return context
 
@@ -71,21 +66,9 @@ class RegisterView(FormView):
 class ContactFormView(FormView):
     template_name = "core/contact.html"
     form_class = ContactForm
-    success_url = "/"
+    success_url = reverse_lazy("core:contact")
 
     def form_valid(self, form):
-        email = form.cleaned_data["email"]
-        comentario = form.cleaned_data["comentario"]
-
-        Contact.objects.create(email=email, comentario=comentario)
-
-        message_content = f"{email} ha escrito lo siguiente: {comentario}"
-        # NO OPERATIVA
-        success = send_mail(
-            "Formulario de contacto",
-            message_content,
-            "info@laveladaconquer.com",
-            ["prueba@gmail.com"],
-            fail_silently=False,
-        )
+        form.save()
+        messages.success(self.request, "Mensaje enviado correctamente.")
         return super().form_valid(form)

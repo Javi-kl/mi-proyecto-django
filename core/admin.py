@@ -3,8 +3,10 @@ from django.contrib import admin
 from .models import Contact
 
 
-# Register your models here.
 @admin.register(Contact)
-class ContactResource(admin.ModelAdmin):
-    model = Contact
-    list_display = ("nombre", "contactado", "email", "created_at")
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ("pk", "email", "created_at", "contactado")
+    list_filter = ("contactado", "created_at")
+    search_fields = ("email", "comentario")
+    readonly_fields = ("created_at",)
+    ordering = ("-created_at",)
