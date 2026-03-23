@@ -1,21 +1,25 @@
 <ul class="main-menu">
-    <li><a href="{% url 'core:home' %}">Inicio</a></li>
-    <li><a href="{% url 'core:about_us' %}">Sobre mí</a></li>
-    <li><a href="{% url 'blog:posts_list' %}">Blog</a></li>
-    <li><a href="{% url 'projects:projects_list' %}">Proyectos</a></li>
-    <li><a href="{% url 'core:register' %}">Registro</a></li>
-    <li><a href="{% url 'core:contact' %}">Contacto</a></li>
-    {% if request.user.is_authenticated %}
-        <li><a href="{% url 'core:logout' %}">Cerrar sesión</a></li>
+    <li><a href="{% url 'core:home' %}">INICIO</a></li>
+    <li><a href="{% url 'core:about_us' %}">SOBRE MÍ</a></li>
+    <li><a href="{% url 'core:contact' %}">CONTACTO</a></li>
+    {% if not request.user.is_authenticated %}
+        <li><a href="{% url 'core:register' %}">REGISTRO</a></li>
     {% endif %}
-    
+    {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'core:logout' %}">
+            {% csrf_token %}
+            <button type="submit">CERRAR SESIÓN</button>
+        </form>
+    {% else %}
+        <button><a href="{% url 'core:login' %}">LOGIN</a></button>
+    {% endif %}
 </ul>
 
 
-<section class="user">
-    {% if request.user.is_authenticated %}
-        <p>Estás logueado como {{ request.user}} </p>
-    {% else %}
-        <p><a href="{% url 'core:login' %}">Login</a></p>
+<section class="messages">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
     {% endif %}
 </section>

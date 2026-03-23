@@ -2,7 +2,7 @@
 
 {% block head_title %}Eliminar Proyecto{% endblock%}
 {% block page_content%}
-    <h2>¿Eliminar proyecto {{ object.titulo }} </h2>
+    <h2>¿Eliminar proyecto {{ object.title }} </h2>
     <form method="post">
         {% csrf_token %}
         {{ form }}

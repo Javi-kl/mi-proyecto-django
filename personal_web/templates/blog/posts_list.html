@@ -1,9 +1,0 @@
-{% extends "layout_base.html" %}
-{% block head_title %}Blog{% endblock%}
-{% block page_content%}
-    <ul>
-        <li><a href="{% url 'blog:post_create' %}">Crear Post</a></li>
-    </ul>
-    <h1>Blog</h1>
-    {% include '_includes/_post_card.html' %}
-{% endblock %}

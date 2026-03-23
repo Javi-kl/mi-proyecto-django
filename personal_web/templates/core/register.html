@@ -2,17 +2,27 @@
 
 {% block head_title %}Registro{% endblock%}
 {% block page_content%}
-    <h1>Registro</h1>
-    {% if form %}
-        {% if error_message %}
-            {{ error_message }}
-        {% endif %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button>Enviar</button>
-        </form>
-    {% else %}
-    <p>{{ msj }}</p>
-    {% endif %}
+    <form action="" method="post">
+    {% csrf_token %}
+    
+    <div>
+        {{ form.username.errors }}
+        <label for="id_username">Nombre de usuario</label>
+        {{ form.username }}
+    </div>
+    
+    <div>
+        {{ form.password1.errors }}
+        <label for="id_password1">Contraseña</label>
+        {{ form.password1 }}
+    </div>
+    
+    <div>
+        {{ form.password2.errors }}
+        <label for="id_password2">Confirmar contraseña</label>
+        {{ form.password2 }}
+    </div>
+    
+    <button type="submit">Registrarse</button>
+    </form>
 {% endblock %}

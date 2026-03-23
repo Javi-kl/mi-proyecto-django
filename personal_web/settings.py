@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "thumbnails",
     "debug_toolbar",
     "ckeditor",
-    "blog",
     "core",
     "projects",
 ]
@@ -71,8 +70,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "personal_web.context_processor.get_statistics_posts",
                 "personal_web.context_processor.get_avatar",
+                "personal_web.context_processor.get_statistics_projects",
             ],
         },
     },
