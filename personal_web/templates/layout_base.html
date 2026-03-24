@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block head_title %}Título base{% endblock %}</title>
     <style>
-        .message {
-            padding: 20px;
-            color: white;
-            
-        }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
     </style>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/matrix_theme.css' %}">
 </head>
 <body>
+    <canvas id="matrix-canvas"></canvas>
     <div class="site-wrapper">
         {% include '_includes/_header.html' %}
         <main class="page-content">
@@ -23,5 +20,6 @@
         </main>
         {% include '_includes/_footer.html' %}
     </div>
+    <script src="{% static 'js/matrix-rain.js' %}"></script>
 </body>
 </html>

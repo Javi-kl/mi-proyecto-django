@@ -1,15 +1,19 @@
-{% for project in projects %}
-        <article id="{{project.pk}}">
-            <h2>{{project.title}}</h2>
+<div class="projects-grid">
+    {% for project in projects %}
+        <article class="project-card" id="{{project.pk}}">
             {% if project.project_img %}
                 <picture>
-                    <img src="{{project.project_img.thumbnails.small.url}}" alt="">
+                    <img src="{{project.project_img.thumbnails.small.url}}" alt="{{project.title}}">
                 </picture>
             {% endif%}
-            <p>Fecha de publicación: {{ project.created_at}} </p>
-            {% if project.github_url %}
-                <p>Ver en GitHub: <a href="{{project.github_url}}" target="_blank">{{project.github_url}}</a></p>
-            {% endif %}
-            <p><a href="{% url 'projects:project_detail' project.pk%}"> Ver proyecto</a></p>
-        <article>
+            <div class="project-card-content">
+                <h2>{{project.title}}</h2>
+                <p class="project-card-meta">Publicado: {{ project.created_at|date:"d/m/Y" }}</p>
+                {% if project.github_url %}
+                    <p><a href="{{project.github_url}}" target="_blank">Ver en GitHub</a></p>
+                {% endif %}
+                <p><a href="{% url 'projects:project_detail' project.pk%}">Ver proyecto</a></p>
+            </div>
+        </article>
     {% endfor %}
+</div>
