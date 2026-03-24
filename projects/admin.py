@@ -1,10 +1,11 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 
 from .models import Comment, ProjectModel
 
 
 @admin.register(ProjectModel)
-class ProjectResource(admin.ModelAdmin):
+class ProjectResource(MarkdownxModelAdmin):
     model = ProjectModel
     list_display = ("pk", "title", "order", "created_at")
     ordering = ("order", "created_at")

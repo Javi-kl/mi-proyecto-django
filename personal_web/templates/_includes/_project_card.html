@@ -7,9 +7,6 @@
                 </picture>
             {% endif%}
             <p>Fecha de publicación: {{ project.created_at}} </p>
-            <div>
-                {{project.description|truncatechars:100|safe}}...
-            </div>
             {% if project.github_url %}
                 <p>Ver en GitHub: <a href="{{project.github_url}}" target="_blank">{{project.github_url}}</a></p>
             {% endif %}
