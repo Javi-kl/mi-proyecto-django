@@ -8,10 +8,6 @@ from projects.models import ProjectModel
 class ProjectCreateViewTest(TestCase):
     """
     Tests para ProjectCreateView.
-
-    ESTA VISTA TIENE:
-    - SuperuserRequiredMixin: Solo superusers pueden crear proyectos
-    - Es CRÍTICO testear esto para seguridad
     """
 
     def setUp(self):

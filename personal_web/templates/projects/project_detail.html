@@ -11,11 +11,10 @@
             <li><a href="{% url 'projects:project_delete' project.pk %}">Eliminar Proyecto</a></li>
         </ul>
         {% endif %}
-        <p><a href="{% url 'core:home' %}">Volver</a></p>
         <h1>{{project.title}}</h1>
         {% if project.project_img %}
             <picture>
-                <img src="{{project.project_img.thumbnails.large.url}}" alt="">
+                <img src="{{project.project_img.thumbnails.small.url}}" alt="">
             </picture>
         {% endif%}    
         <div>
