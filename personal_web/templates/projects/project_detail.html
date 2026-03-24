@@ -17,6 +17,7 @@
             </picture>
         {% endif%}    
         <div>
+            {% load markdownx %}
             {{project.description|safe}}
         </div>
         {% if project.github_url %}

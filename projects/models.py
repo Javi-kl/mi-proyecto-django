@@ -1,7 +1,7 @@
-from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from markdownx.models import MarkdownxField
 from thumbnails.fields import ImageField
 
 
@@ -38,7 +38,7 @@ class Comment(models.Model):
 
 class ProjectModel(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
-    description = RichTextField(verbose_name="Descripción")
+    description = MarkdownxField(verbose_name="Descripción", default="")
     created_at = models.DateTimeField(
         verbose_name="Fecha y hora de creación", default=timezone.now
     )

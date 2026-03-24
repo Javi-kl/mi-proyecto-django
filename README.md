@@ -1,6 +1,5 @@
-
 # Javi-kl - Web Personal
-> Portfolio web personal desarrollado con Django — blog,
+> Portfolio web personal desarrollado con Django,
 > sección de proyectos con comentarios y sistema de contacto.
 ## Stack Tecnológico
 | Capa | Tecnología |
@@ -12,29 +11,26 @@
 | Imágenes | Django Thumbnails + Pillow |
 | Plantillas | HTML5 · CSS vanilla |
 ## Features
-### Blog
 - Editor Rich Text con CKEditor
-- Gestión de imágenes con thumbnails automáticos
-- Publicación selectiva en homepage
-- **Sistema de comentarios** (usuarios registrados)
 ### Portfolio de Proyectos
 - Showcase de proyectos y repositorios
 - Enlaces a GitHub y demos
 - Descripción y tecnologías utilizadas
-- **Sistema de comentarios** (usuarios registrados)
+- Gestión de imágenes con thumbnails automáticos
+- Editor Rich Text con CKEditor
+
+### Sistema de comentarios (usuarios registrados)
+- Registro y autenticación (requerido para comentar)
+  
 ### Sistema de Contacto
 - Formulario con validación
 - Mensajes guardados en base de datos
-- Notificaciones por email
-### Usuarios
-- Registro y autenticación (requerido para comentar)
-- Gestión de perfil básico
+
 ## Arquitectura
 ```
 web_personal/
 ├── core/          # Home, About, Contacto, Auth
-├── blog/          # Blog con sistema de comentarios
-├── projects/      # Portfolio de proyectos (próximamente)
+├── projects/      # Portfolio de proyectos 
 └── templates/     # Plantillas reutilizables
 ```
 ## Quick Start
@@ -45,10 +41,10 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
-Roadmap
-- [x] Blog con comentarios
+## Roadmap
 - [x] Sistema de contacto
-- [ ] App de proyectos/portfolio
+- [x] App de proyectos/portfolio
+- [x] Comentarios
 - [ ] Tests unitarios
 - [ ] Despliegue en producción
 ---

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "thumbnails",
     "debug_toolbar",
-    "ckeditor",
+    "markdownx",
     "core",
     "projects",
 ]
@@ -165,7 +165,6 @@ THUMBNAILS = {
     },
 }
 
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 # Configuración de correo (EJEMPLO FICTICIO)
 

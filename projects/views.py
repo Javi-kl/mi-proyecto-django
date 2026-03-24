@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -24,7 +24,7 @@ class ProjectCreateView(SuperuserRequiredMixin, CreateView):
     model = ProjectModel
     fields = ["title", "description", "project_img", "github_url", "order"]
     template_name = "projects/project_create.html"
-    success_url = reverse_lazy("projects:projects_list")
+    success_url = reverse_lazy("core:home")
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -68,12 +68,12 @@ class ProjectUpdateView(SuperuserRequiredMixin, UpdateView):
     model = ProjectModel
     fields = ["title", "description", "project_img", "github_url", "order"]
     template_name = "projects/project_update.html"
-    success_url = reverse_lazy("projects:projects_list")
+    success_url = reverse_lazy("core:home")
 
 
 class ProjectDeleteView(SuperuserRequiredMixin, DeleteView):
     model = ProjectModel
-    success_url = reverse_lazy("projects:projects_list")
+    success_url = reverse_lazy("core:home")
     template_name = "projects/project_delete.html"
 
 

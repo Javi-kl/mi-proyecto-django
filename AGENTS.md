@@ -74,7 +74,6 @@ python manage.py test -v 2
 from pathlib import Path
 # 2. Third-party
 from django.db import models
-from ckeditor.fields import RichTextField
 # 3. Local application (relative)
 from .models import Post
 ```

@@ -23,6 +23,7 @@ from django.urls import include, path
 
 urlpatterns = (
     [
+        path("markdownx/", include("markdownx.urls")),
         path("", include("core.urls", namespace="core")),
         path("projects/", include("projects.urls", namespace="projects")),
         path("admin/", admin.site.urls),
