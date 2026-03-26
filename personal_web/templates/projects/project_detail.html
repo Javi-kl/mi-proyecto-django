@@ -12,11 +12,7 @@
         </ul>
         {% endif %}
         <h1>{{project.title}}</h1>
-        {% if project.project_img %}
-            <picture>
-                <img src="{{project.project_img.thumbnails.small.url}}" alt="">
-            </picture>
-        {% endif%}    
+        {# Imagen de proyecto deshabilitada temporalmente #} 
         <div>
             {{project.description|render_markdown}}
         </div>

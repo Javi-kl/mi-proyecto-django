@@ -22,7 +22,7 @@ class SuperuserRequiredMixin(UserPassesTestMixin):
 
 class ProjectCreateView(SuperuserRequiredMixin, CreateView):
     model = ProjectModel
-    fields = ["title", "description", "project_img", "github_url", "order"]
+    fields = ["title", "description", "github_url", "order"]
     template_name = "projects/project_create.html"
     success_url = reverse_lazy("core:home")
 
@@ -66,7 +66,7 @@ class ProjectDetailView(DetailView, FormMixin):
 
 class ProjectUpdateView(SuperuserRequiredMixin, UpdateView):
     model = ProjectModel
-    fields = ["title", "description", "project_img", "github_url", "order"]
+    fields = ["title", "description", "github_url", "order"]
     template_name = "projects/project_update.html"
     success_url = reverse_lazy("core:home")
 

@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from markdownx.models import MarkdownxField
-from thumbnails.fields import ImageField
 
 
 class Comment(models.Model):
@@ -42,13 +41,13 @@ class ProjectModel(models.Model):
     created_at = models.DateTimeField(
         verbose_name="Fecha y hora de creación", default=timezone.now
     )
-
-    project_img = ImageField(
-        verbose_name="Imagen del proyecto",
-        upload_to="projects/images/",
-        null=True,
-        blank=True,
-    )
+    # TEMPORAL: Descomentar al configurar almacenamiento S3/Nginx
+    # project_img = ImageField(
+    #    verbose_name="Imagen del proyecto",
+    #    upload_to="projects/images/",
+    #    null=True,
+    #    blank=True,
+    # )
     github_url = models.URLField(verbose_name="GitHub", blank=True, null=True)
 
     created_by = models.ForeignKey(
