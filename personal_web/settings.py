@@ -39,16 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",
     "thumbnails",
-    "debug_toolbar",
     "markdownx",
     "core",
     "projects",
 ]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -71,7 +68,6 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "personal_web.context_processor.get_avatar",
-                "personal_web.context_processor.get_statistics_projects",
             ],
         },
     },
@@ -134,10 +130,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-INTERNAL_IPS = [
-    "127.0.0.1",
-    "localhost",
-]
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -166,14 +159,6 @@ THUMBNAILS = {
 }
 
 
-# Configuración de correo (EJEMPLO FICTICIO)
-
-EMAIL_HOST = "smtp.dondominio"
-EMAIL_HOST_USER = "info@laveladaconquer.com"
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
 LOGIN_URL = "/login"
-LOGIN_REDIRECT_URL = "/"  # La vista a la que redirige después de hacer login exitoso
-LOGOUT_REDIRECT_URL = "/"  # La vista a la que redirige después de un logout
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
