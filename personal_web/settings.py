@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "thumbnails",
     "markdownx",
     "core",
     "projects",
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -79,13 +79,23 @@ WSGI_APPLICATION = "personal_web.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.sqlite3",
+#        "NAME": BASE_DIR / "db.sqlite3",
+#    }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DB"),
+        "USER": config("POSTGRES_USER"),
+        "PASSWORD": config("POSTGRES_PASSWORD"),
+        "HOST": config("POSTGRES_HOST"),
+        "PORT": config("POSTGRES_PORT"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -135,30 +145,39 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-THUMBNAILS = {
-    "METADATA": {
-        "BACKEND": "thumbnails.backends.metadata.DatabaseBackend",
-    },
-    "STORAGE": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-        # You can also use Amazon S3 or any other Django storage backends
-    },
-    "SIZES": {
-        "small": {
-            "PROCESSORS": [
-                {"PATH": "thumbnails.processors.resize", "width": 300, "height": 200},
-            ],
-        },
-        "large": {
-            "PROCESSORS": [
-                {"PATH": "thumbnails.processors.resize", "width": 800, "height": 600},
-                {"PATH": "thumbnails.processors.crop", "width": 808, "height": 200},
-            ],
-        },
-    },
-}
-
-
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+
+# =============================================================================
+# PRODUCCIÓN - SEGURIDAD
+# =============================================================================
+if not DEBUG:
+    # Forzar HTTPS
+    SECURE_SSL_REDIRECT = True
+
+    # Cookies seguras (solo HTTPS)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+    # HTTP Strict Transport Security (HSTS)
+    # Previene ataques de downgrade de HTTPS a HTTP
+    SECURE_HSTS_SECONDS = 31536000  # 1 año
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    # Headers de seguridad adicionales
+    SECURE_CONTENT_TYPE_NOSNIFF = True  # Previene MIME-sniffing
+    SECURE_BROWSER_XSS_FILTER = True  # Ayuda contra XSS
+    X_FRAME_OPTIONS = "DENY"  # Previene clickjacking
+
+
+# =============================================================================
+# WHITENOISE - ARCHIVOS ESTÁTICOS
+# =============================================================================
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}

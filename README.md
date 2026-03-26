@@ -43,6 +43,8 @@ python manage.py runserver
 - [ ] Despliegue en producción
 
 ## Notas
+
 Desarrollado a partir de base ConquerBlocks, extendido con modelos y 
 lógica propios. IA usada para frontend y tests base.
+
 ---

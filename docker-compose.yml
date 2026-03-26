@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: django_user_db
+      POSTGRES_PASSWORD: django_user_db_password
+      POSTGRES_DB: mydb
+      POSTGRES_ROOT_PASSWORD: django_root_db_password
+    ports:
+      - "5432:5432"
+    
