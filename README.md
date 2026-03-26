@@ -1,50 +1,48 @@
-# Javi-kl - Web Personal
-> Portfolio web personal desarrollado con Django,
-> sección de proyectos con comentarios y sistema de contacto.
+# Portfolio Personal - Javi-kl 
+> Portfolio web con sistema de autenticación, gestión de proyectos y comentarios.
 ## Stack Tecnológico
 | Capa | Tecnología |
 |------|------------|
 | Framework | Django 6.0.2 |
 | Lenguaje | Python 3.14 |
 | Base de datos | SQLite3 |
-| Rich Text | CKEditor 6.7 |
+| Markdown | markdownx 4.0.9 |
 | Imágenes | Django Thumbnails + Pillow |
-| Plantillas | HTML5 · CSS vanilla |
-## Features
-- Editor Rich Text con CKEditor
-### Portfolio de Proyectos
-- Showcase de proyectos y repositorios
-- Enlaces a GitHub y demos
-- Descripción y tecnologías utilizadas
-- Gestión de imágenes con thumbnails automáticos
-- Editor Rich Text con CKEditor
 
-### Sistema de comentarios (usuarios registrados)
-- Registro y autenticación (requerido para comentar)
-  
-### Sistema de Contacto
-- Formulario con validación
-- Mensajes guardados en base de datos
+## Estructura
+### Apps:
+- core - Home, About, Contacto, Auth (login/registro)
+- projects - Portfolio de proyectos con comentarios
+- personal_web - Configuración del proyecto
+### Modelos:
+- Contact - Formulario de contacto
+- ProjectModel - Proyectos con imagen y descripción markdown
+- Comment - Comentarios de usuarios en proyectos
+### Funcionalidades:
+- Portfolio de proyectos (CRUD solo para superuser)
+- Sistema de comentarios (requiere autenticación)
+- Formulario de contacto
+- Autenticación básica (login/registro)
 
-## Arquitectura
-```
-web_personal/
-├── core/          # Home, About, Contacto, Auth
-├── projects/      # Portfolio de proyectos 
-└── templates/     # Plantillas reutilizables
-```
+
 ## Quick Start
 ```bash
+git clone https://github.com/Javi-kl/Web-Personal-Django
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
+
 ## Roadmap
 - [x] Sistema de contacto
 - [x] App de proyectos/portfolio
 - [x] Comentarios
-- [ ] Tests unitarios
+- [x] Tests unitarios
 - [ ] Despliegue en producción
+
+## Notas
+Desarrollado a partir de base ConquerBlocks, extendido con modelos y 
+lógica propios. IA usada para frontend y tests base.
 ---
