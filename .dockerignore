@@ -1,0 +1,32 @@
+# =============================================================================
+# ARCHIVOS A EXCLUIR DE LA IMAGEN
+# =============================================================================
+# ¿Por qué? reduce tamaño y evita copiar secretos
+# Git
+.git
+.gitignore
+# Python
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+# Django
+db.sqlite3
+*.log
+# Archivos generados
+staticfiles/
+media/
+# IDE
+.idea
+.vscode
+# Entornos y secretos
+.env
+.env.production
+# Docker/Podman (evitar recursión)
+Dockerfile
+docker-compose.yml
+.dockerignore
