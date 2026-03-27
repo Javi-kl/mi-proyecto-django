@@ -2,7 +2,6 @@
 
 import django.db.models.deletion
 import django.utils.timezone
-import thumbnails.fields
 from django.conf import settings
 from django.db import migrations, models
 
@@ -39,15 +38,6 @@ class Migration(migrations.Migration):
                     "show_home",
                     models.BooleanField(
                         default=False, verbose_name="Mostrar en la home"
-                    ),
-                ),
-                (
-                    "project_img",
-                    thumbnails.fields.ImageField(
-                        blank=True,
-                        null=True,
-                        upload_to="projects/images/",
-                        verbose_name="Imagen del proyecto",
                     ),
                 ),
                 (
